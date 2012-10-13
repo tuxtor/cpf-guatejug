@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+  <h:head>
+    <title>Registro JavaDay</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="css/table.css" rel="stylesheet" />
+    <meta http-equiv="pragma" content="no-cache" />
+  </h:head>
+  <h:body>
+    <f:loadBundle basename="org.guatejug.presentation.textos" var="msg"/>
+    <div class="container">
+      <div class="container span12">
+        <div class="container-fluid span5">
+          <a href="http://www.guate-jug.net">
+            <img src="http://www.guate-jug.net/wp-content/uploads/2012/04/logo-responsive1.png" width="300" height="100" alt="Comunidad de programadores Java Guatemala" class="img-rounded" />
+          </a>
+        </div>
+        <div class="container-fluid span5">
+          <div class="navbar">
+            <ul class="nav nav-pills">
+              <li class="active">
+                <a href="#">Registro</a>
+              </li>
+              <li><a href="http://www.guate-jug.net" target="_blank">GuateJug</a></li>
+              <li><a href="http://www.guate-jug.net/jday12" target="_blank">Evento</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container span12">
+        <h2>Registro ponencias Javaday 2012</h2>
+      </div>
+      <div class="container span12">
+        <div>
+          <p>
+            <h:messages errorStyle="color:red" />
+          </p>
+          <p>
+
+          </p>
+        </div>
+      </div>
+      <div class="container-fluid span12">
+        <h:form id="form">
+          <fieldset class="step">	 									
+            <p> <!-- id="req_p" class="req_p">-->
+              <label for="title" style="margin-right:30px">T&iacute;tulo:</label>
+              <h:inputText class="span9" id="title" value="#{index.ponencia.titulo}" required="true" requiredMessage="#{msg.errorTitulo}" size="250" />
+              <br />
+              <label for="cat">Categor&iacute;a</label>
+              <h:selectOneMenu id="cat" value="#{index.ponencia.categoria}">
+                <f:selectItems value="#{index.categoriaMap}" />
+              </h:selectOneMenu> 
+              <br />
+            </p>
+            <p style="text-align:left span12">
+              <label for="summary" style="vertical-align:top;margin-right:10px" >Resumen (m&iacute;nimo 50 palabras)</label>
+              <h:inputTextarea class="span9" id="summary" value="#{index.ponencia.resumen}" cols="8" rows="10" required="true" requiredMessage="#{msg.errorResumen}" size="2000" /><br />
+
+              <label for="timelength" style="margin-right:10px">Duraci&oacute;n:</label>
+              <h:selectOneMenu id="timelength" value="#{index.ponencia.duracion}">
+                <f:selectItems value="#{index.duracionMap}" />
+              </h:selectOneMenu><br />
+
+              <label for="talkcategory" style="margin-right:10px">Tipo:</label>
+              <h:selectOneMenu id="talkcategory" value="#{index.ponencia.tipo}">
+                <f:selectItems value="#{index.tipoMap}" />
+              </h:selectOneMenu><br />
+            </p>
+            <p>
+              <label>Requerimientos para la ponencia:</label>
+              <h:selectBooleanCheckbox
+                id="inlineCheckbox1"
+                class="checkbox inline"
+                value="#{index.ponencia.bdataShow}">Proyector</h:selectBooleanCheckbox>
+              <h:selectBooleanCheckbox
+                id="inlineCheckbox2"
+                class="checkbox inline">Laptop</h:selectBooleanCheckbox><br /><br />
+              <label for="otherReq">Otros (Opcional)</label>
+              <h:inputTextarea class="span6" id="otherReq" value="#{index.ponencia.otros}" required="false" size="700" /><br />
+            </p>
+          </fieldset>
+          <fieldset class="step">
+            <legend>Informaci&oacute;n de ponente</legend>
+            <p style="text-align:justify">Por favor, indica una direcci&oacute;n de <strong>correo-e</strong> valida; esta cuenta de correo ser&aacute;n el punto de contacto principal de GuateJug.</p>
+            <p>Introduce, adem&aacute;s, el <strong>nombre del ponente</strong> y dem&aacute;s datos para ponerlos en la informac&iacute;n de tu charla.</p>
+            <!-- <p style="text-align:right;color:red"><i>Los campos con * son obligatorios.</i></p> -->
+            <h:panelGroup layout="block" id="input-ponentes" class="clonedInput">
+              <p> 
+                <div class="controls controls-row span3">
+                  <label for="name1">Nombre:</label>
+                  <h:inputText id="name1"  value="#{index.ponente.nombres}" required="false" size="150" />
+                </div>
+                <div class="controls controls-row span3">
+                  <label for="surname1">Apellidos:</label>
+                  <h:inputText id="surname1" value="#{index.ponente.apellidos}" required="false" size="150" />
+                </div>
+                <div class="controls controls-row span3">
+                  <label for="email1">E-mail:</label>
+                  <h:inputText id="email1" value="#{index.ponente.email}" required="false" size="150">
+                  <f:validator validatorId="org.guatejug.util.EmailValidator" />
+                  </h:inputText>
+                </div>
+                <br />
+                <div class="controls controls-row span9">
+                  <label for="bio1">Biograf&iacute;a:</label>
+                  <h:inputTextarea class="span9" id="bio1" value="#{index.ponente.biografia}" required="false" size="2000" /><br />
+                </div>
+                <div class="controls controls-row span9">
+                  <label for="info1">Observaciones (Opcional):</label>
+                  <h:inputTextarea class="span9" id="info1" value="#{index.ponente.observaciones}" required="false" size="2000" /><br />
+                  <h:messages for="input-ponentes" errorStyle="color:red" />                  
+                </div>
+                <br />
+              </p>
+
+            </h:panelGroup>
+            <div class="controls controls-row span9">
+              <p style="text-align: center">
+                <h:commandButton id="btnAdd" value="A&ntilde;adir">
+                  <f:ajax listener="#{index.agregarPonente}" execute="input-ponentes" event="click" render="input-ponentes table-ponencias" />
+                </h:commandButton>
+              </p>
+            </div>
+            <div class="controls controls-row span9 ">
+              <p>
+
+                <h:dataTable id="table-ponencias" styleClass="table-ponencias" value="#{index.listadoPonentes}" var="item">
+                  <h:column>
+                    <f:facet name="header">
+                      <h:outputText value="Nombres"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombres}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">
+                      <h:outputText value="Apellidos"/>
+                    </f:facet>
+                    <h:outputText value="#{item.apellidos}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">
+                      <h:outputText value="Email"/>
+                    </f:facet>
+                    <h:outputText value="#{item.email}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">
+                      <h:outputText value="Biografia"/>
+                    </f:facet>
+                    <h:outputText value="#{item.biografia}"/>
+                  </h:column>
+                  <h:column>
+                    <f:facet name="header">
+                      <h:outputText value="Observaciones"/>
+                    </f:facet>
+                    <h:outputText value="#{item.observaciones}"/>
+                  </h:column>
+                  <h:column>
+
+                    <f:facet name="header">Eliminar</f:facet>
+
+                    <h:commandButton value="Eliminar">
+
+                      <f:ajax listener="#{index.eliminarPonente(item)}" event="click" execute="table-ponencias" render="@form" />
+                    </h:commandButton>
+
+                  </h:column>
+                </h:dataTable>
+
+
+              </p>
+            </div>
+          </fieldset>          
+
+          <fieldset class="step">
+            <legend>Confirmar registro de ponencia</legend>
+            <p>
+              <img src="kaptcha.jpg" /> <h:inputText id="kaptcha" value="#{index.captchaRecivido}" required="true" requiredMessage="#{msg.errorCaptcha}" />
+            </p>
+            <p>
+              <h:selectBooleanCheckbox
+                id="acceptTerms"
+                class="checkbox inline"
+                value="#{index.propuestaConfirmada}" /><h:outputLabel value="#{msg.confirmacion}" />
+
+            </p>
+
+            <p style="text-align:center">
+              <h:commandButton id="btnSubmit"  value="Enviar ponencia" action="#{index.persistirPonencia()}"/>
+            </p>
+            <p>
+              <h:messages errorStyle="color:red" />
+            </p>
+          </fieldset>                
+        </h:form>
+      </div>
+    </div>
+  </h:body>
+</html>
