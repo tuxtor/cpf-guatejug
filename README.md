@@ -1,1 +1,1 @@
-#Registration papers for GuateJug, more info at www.guate-jug.net
+Proof of concept of a pure JSF call for papers, twitter bootstrap and openshift

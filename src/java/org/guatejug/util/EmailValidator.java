@@ -46,7 +46,7 @@ public class EmailValidator implements Validator {
                 if (!matcher.matches()) {
                         //FacesContext.getCurrentInstance().addMessage("form:input-ponentes",
                         FacesMessage msg =
-                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Por favor introduzca la biografia del ponente", "");
+                                new FacesMessage(FacesMessage.SEVERITY_ERROR, "El e-mail es invalido", "");
                         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
                         
                         throw new ValidatorException(msg);

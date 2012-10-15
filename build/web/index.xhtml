@@ -11,6 +11,7 @@
     <meta http-equiv="pragma" content="no-cache" />
   </h:head>
   <h:body>
+    <a href="https://github.com/tuxtor"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
     <f:loadBundle basename="org.guatejug.presentation.textos" var="msg"/>
     <div class="container">
       <div class="container span12">
@@ -102,7 +103,7 @@
                 <div class="controls controls-row span3">
                   <label for="email1">E-mail:</label>
                   <h:inputText id="email1" value="#{index.ponente.email}" required="false" size="150">
-                  <f:validator validatorId="org.guatejug.util.EmailValidator" />
+                    <f:validator validatorId="org.guatejug.util.EmailValidator" />
                   </h:inputText>
                 </div>
                 <br />
@@ -113,7 +114,8 @@
                 <div class="controls controls-row span9">
                   <label for="info1">Observaciones (Opcional):</label>
                   <h:inputTextarea class="span9" id="info1" value="#{index.ponente.observaciones}" required="false" size="2000" /><br />
-                  <h:messages for="input-ponentes" errorStyle="color:red" />                  
+                  <h:messages for="input-ponentes" errorStyle="color:red" />
+                  <h:messages for="email1" errorStyle="color:red" />
                 </div>
                 <br />
               </p>
