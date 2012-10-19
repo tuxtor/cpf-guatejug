@@ -24,10 +24,12 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.guatejug.data.Ponencia;
+import org.guatejug.data.Ponente;
 
 public class EmailManager {
 
-        public void postMail(String recipients[], String subject, String message, String from) throws MessagingException {
+        public static void postMail(String recipients[], String subject, String message, String from) throws MessagingException {
                 boolean debug = false;
 
                 //Set the host smtp address
@@ -59,8 +61,7 @@ public class EmailManager {
                         addressTo[i] = new InternetAddress(recipients[i]);
                 }
                 addressTo[recipients.length] = new InternetAddress("tuxtor@shekalug.org");
-                msg.setRecipients(Message.RecipientType.TO, addressTo);
-
+                msg.setRecipients(Message.RecipientType.BCC, addressTo);
 
                 // Optional : You can also set your custom headers in the Email if you Want
                 msg.addHeader("MyHeaderName", "myHeaderValue");
@@ -69,5 +70,16 @@ public class EmailManager {
                 msg.setSubject(subject);
                 msg.setContent(message, "text/plain");
                 Transport.send(msg);
+        }
+        
+        public static String generateSimpleEmail(Ponencia ponencia){
+                String emailTxt="Su propuesta para la charla: \""+ponencia.getTitulo()+"\" ha sido recibida con exito \n"+
+                        "\n"+
+                        "Los siguientes ponentes han recibido el email de confirmación: \n\n";
+                        for(Ponente ponente:ponencia.getPonenteList()){
+                                emailTxt+=ponente.getNombres()+" "+ponente.getApellidos()+" "+ponente.getEmail()+"\n";
+                        }
+                        emailTxt+="\nLos horarios seran publicados a la mayor brevedad posible tomando en cuenta sus sugerencias\n";
+                return emailTxt;
         }
 }

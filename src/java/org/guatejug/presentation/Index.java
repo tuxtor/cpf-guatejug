@@ -59,7 +59,7 @@ public class Index implements Serializable {
         private UserTransaction utx;
         private UIComponent component;
         private boolean propuestaConfirmada;
-        
+
         static {
         }
 
@@ -67,7 +67,6 @@ public class Index implements Serializable {
          * Creates a new instance of Index
          */
         public Index() {
-                System.out.println("Entrando al constructar");
                 ponente = new Ponente();
                 ponencia = new Ponencia();
                 listadoPonentes = new ArrayList<Ponente>();
@@ -100,12 +99,19 @@ public class Index implements Serializable {
                         .get(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY).toString();
                 if (!captchaEsperado.equalsIgnoreCase(captchaRecivido)) {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al introducir el codigo captcha", "Error al introducir el codigo captcha"));
-                        this.captchaRecivido="";
+                        this.captchaRecivido = "";
+                        return null;
+                }
+
+                if (!propuestaConfirmada) {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe confirmar que essu charla propuesta no esta en contra, ni utiliza material que pueda implicar problemas con derechos de autor", "Debe confirmar que essu charla propuesta no esta en contra, ni utiliza material que pueda implicar problemas con derechos de autor"));
+                        this.captchaRecivido = "";
                         return null;
                 }
 
                 if (listadoPonentes == null || listadoPonentes.size() <= 0) {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe agregar al menos un ponente", "Debe agregar al menos un ponente"));
+                        this.captchaRecivido = "";
                         return null;
                 }
 
@@ -122,22 +128,23 @@ public class Index implements Serializable {
                         PonenciaJpaController controladorPonencia = new PonenciaJpaController(utx, emf);
                         controladorPonencia.create(ponencia);
                         try {
-                                String[] arrayDestinatarios=new String[ponencia.getPonenteList().size()];
-                                int i=0;
-                                for(Ponente pon:ponencia.getPonenteList()){
-                                        arrayDestinatarios[i]=pon.getEmail();
+                                String[] arrayDestinatarios = new String[ponencia.getPonenteList().size()];
+                                int i = 0;
+                                for (Ponente pon : ponencia.getPonenteList()) {
+                                        arrayDestinatarios[i] = pon.getEmail();
                                         i++;
                                 }
-                                EmailManager emailMan = new EmailManager();
-                                emailMan.postMail(arrayDestinatarios, 
-                                        "Confirmacion de charla", 
-                                        "Su charla ha sido confirmada",
+                                EmailManager.postMail(arrayDestinatarios,
+                                        "Confirmacion de charla 2012",
+                                        EmailManager.generateSimpleEmail(ponencia),
                                         "info@guate-jug.net");
                         } catch (Exception e) {
+                                e.printStackTrace();
                         }
                         return "exito.xhtml?faces-redirect=true";
                 } catch (Exception e) {
                         e.printStackTrace();
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocurrio un problema grave al grabar su propuesta, por favor contacte a info@guate-jug.net", "Ocurrio un problema grave al grabar su propuesta, por favor contacte a info@guate-jug.net"));
                         return "";
 
                 }
@@ -168,6 +175,13 @@ public class Index implements Serializable {
                 if (ponente.getBiografia().isEmpty()) {
                         FacesContext.getCurrentInstance().addMessage("form:input-ponentes", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Por favor introduzca la biografia del ponente", ""));
                         return;
+                }
+
+                for (Ponente ponenteListado : listadoPonentes) {
+                        if (ponenteListado.getEmail().equalsIgnoreCase(ponente.getEmail())) {
+                                FacesContext.getCurrentInstance().addMessage("form:input-ponentes", new FacesMessage(FacesMessage.SEVERITY_ERROR, "El ponente con el email: " + ponente.getEmail() + " ya ha sido agregado", ""));
+                                return;
+                        }
                 }
                 getListadoPonentes().add(ponente);
                 ponente = new Ponente();

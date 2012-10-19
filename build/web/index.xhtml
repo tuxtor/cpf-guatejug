@@ -4,7 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
   <h:head>
-    <title>Registro JavaDay</title>
+    <title>Registro Java Day</title>
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
     <link href="css/table.css" rel="stylesheet" />
@@ -33,7 +33,16 @@
         </div>
       </div>
       <div class="container span12">
-        <h2>Registro ponencias Javaday 2012</h2>
+        <h2>Registro ponencias Java Day 2012</h2>
+      </div>
+      <div class="container span12">
+        Agradecemos su interes por el Java Day, este es un evento realizado por y para la comunidad.<br /><br />
+        Fechas importantes:
+        <ul>
+          <li>Inicio de registro de ponencias: <b>19 de Octubre de 2012</b> </li>
+          <li>Inicio de registro de ponencias: <b>2 de Noviembre de 2012</b> </li>
+          <li>Realización del Java Day: <b>10 de Noviembre de 2012</b> </li>
+        </ul>
       </div>
       <div class="container span12">
         <div>
@@ -59,9 +68,9 @@
               <br />
             </p>
             <p style="text-align:left span12">
-              <label for="summary" style="vertical-align:top;margin-right:10px" >Resumen (m&iacute;nimo 50 palabras)</label>
-              <h:inputTextarea class="span9" id="summary" value="#{index.ponencia.resumen}" cols="8" rows="10" required="true" requiredMessage="#{msg.errorResumen}" size="2000" /><br />
-
+              <label for="summary" style="vertical-align:top;margin-right:10px" >Resumen (maximo 2000 caracteres)</label>
+              <h:inputTextarea class="span9" id="summary" value="#{index.ponencia.resumen}" cols="8" rows="10" required="true" requiredMessage="#{msg.errorResumen}" size="2000" />
+              <br />
               <label for="timelength" style="margin-right:10px">Duraci&oacute;n:</label>
               <h:selectOneMenu id="timelength" value="#{index.ponencia.duracion}">
                 <f:selectItems value="#{index.duracionMap}" />
@@ -81,14 +90,14 @@
               <h:selectBooleanCheckbox
                 id="inlineCheckbox2"
                 class="checkbox inline">Laptop</h:selectBooleanCheckbox><br /><br />
-              <label for="otherReq">Otros (Opcional)</label>
-              <h:inputTextarea class="span6" id="otherReq" value="#{index.ponencia.otros}" required="false" size="700" /><br />
+              <label for="otherReq">Otros, restricciones de horario, comentarios, sugerencias para su charla (Opcional, maximo 2000 caracteres)</label>
+              <h:inputTextarea class="span9" rows="10" id="otherReq" value="#{index.ponencia.otros}" required="false" size="2000" /><br />
             </p>
           </fieldset>
           <fieldset class="step">
             <legend>Informaci&oacute;n de ponente</legend>
-            <p style="text-align:justify">Por favor, indica una direcci&oacute;n de <strong>correo-e</strong> valida; esta cuenta de correo ser&aacute;n el punto de contacto principal de GuateJug.</p>
-            <p>Introduce, adem&aacute;s, el <strong>nombre del ponente</strong> y dem&aacute;s datos para ponerlos en la informac&iacute;n de tu charla.</p>
+            <p style="text-align:justify">Por favor, introduzca una direcci&oacute;n de <strong>correo-e</strong> valida; esta cuenta de correo ser&aacute;n el punto de contacto principal de GuateJug.</p>
+            <p>Introduzca, adem&aacute;s, el <strong>nombre del ponente</strong> y dem&aacute;s datos, estos seran publicados en el sitio Web del evento.</p>
             <!-- <p style="text-align:right;color:red"><i>Los campos con * son obligatorios.</i></p> -->
             <h:panelGroup layout="block" id="input-ponentes" class="clonedInput">
               <p> 
@@ -181,23 +190,26 @@
 
           <fieldset class="step">
             <legend>Confirmar registro de ponencia</legend>
-            <p>
-              <img src="kaptcha.jpg" /> <h:inputText id="kaptcha" value="#{index.captchaRecivido}" required="true" requiredMessage="#{msg.errorCaptcha}" />
-            </p>
-            <p>
+            <div class="controls controls-row span9">
+              <p style="text-align: center">
+                <img src="kaptcha.jpg" /> <h:inputText id="kaptcha" value="#{index.captchaRecivido}" required="true" requiredMessage="#{msg.errorCaptcha}" />
+              </p>
+            </div>
+            <div class="controls controls-row span9">
+
               <h:selectBooleanCheckbox
-                id="acceptTerms"
                 class="checkbox inline"
-                value="#{index.propuestaConfirmada}" /><h:outputLabel value="#{msg.confirmacion}" />
-
-            </p>
-
-            <p style="text-align:center">
-              <h:commandButton id="btnSubmit"  value="Enviar ponencia" action="#{index.persistirPonencia()}"/>
-            </p>
-            <p>
-              <h:messages errorStyle="color:red" />
-            </p>
+                value="#{index.propuestaConfirmada}">#{msg.confirmacion}</h:selectBooleanCheckbox> 
+              <br />
+              <p style="text-align: center">
+                <h:commandButton id="btnSubmit"  value="Enviar ponencia" action="#{index.persistirPonencia()}"/>
+              </p>
+            </div>
+            <div class="controls controls-row span9">
+              <p>
+                <h:messages errorStyle="color:red" />
+              </p>
+            </div>
           </fieldset>                
         </h:form>
       </div>
