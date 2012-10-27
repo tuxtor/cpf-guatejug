@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+  <h:head>
+    <title>Listado ponencias JavaDay</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="css/table.css" rel="stylesheet" />
+    <meta http-equiv="pragma" content="no-cache" />
+  </h:head>
+  <h:body>
+    <f:view>
+      <h:form id="form">
+        <h:panelGroup id="listado-ponentes" style="width: 90%; margin-left:auto; margin-right:auto;" layout="block">
+
+          <h1><h:outputText value="Listado ponencias"/></h1>
+          <h:dataTable id="table-ponencias" value="#{listadoPonencias.listadoPonencias}" styleClass="table-ponencias" var="item">
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="#"/>
+              </f:facet>
+              <h:outputText value="#{item.idPonencia}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Titulo"/>
+              </f:facet>
+              <h:outputText value="#{item.titulo}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Categoria"/>
+              </f:facet>
+              <h:outputText value="#{item.textoCategoria}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Tipo"/>
+              </f:facet>
+              <h:outputText value="#{item.textoTipo}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Resumen"/>
+              </f:facet>
+              <h:outputText value="#{item.resumen}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Duracion"/>
+              </f:facet>
+              <h:outputText value="#{item.textoDuracion}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Datashow"/>
+              </f:facet>
+              <h:selectBooleanCheckbox disabled="true" value="#{item.bdataShow}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Laptop"/>
+              </f:facet>
+              <h:selectBooleanCheckbox disabled="true" value="#{item.blaptop}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Otros"/>
+              </f:facet>
+              <h:outputText value="#{item.otros}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">#</f:facet>
+              <h:commandButton value="Ver ponentes">
+                <f:ajax listener="#{listadoPonencias.setSelectedPonencia(item.idPonencia)}" event="click" execute="table-ponencias" render=":#{listadoPonencias.ponentesDataTable.clientId}" />
+              </h:commandButton>
+            </h:column>            
+          </h:dataTable>
+          <h2><h:outputText value="Ponentes"/></h2>
+
+
+          <h:dataTable id="table-ponentes" binding="#{listadoPonencias.ponentesDataTable}" value="#{listadoPonencias.selectedPonencia.ponenteList}" var="ponente" styleClass="table-ponencias">
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="#"/>
+              </f:facet>
+              <h:outputText value="#{ponente.idPonente}"/>
+            </h:column>              
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Nombres"/>
+              </f:facet>
+              <h:outputText value="#{ponente.nombres}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Apellidos"/>
+              </f:facet>
+              <h:outputText value="#{ponente.apellidos}"/>
+            </h:column>
+            <!--h:column>
+              <f:facet name="header">
+                <h:outputText value="Email"/>
+              </f:facet>
+              <h:outputText value="#{ponente.email}"/>
+            </h:column-->
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Biografia"/>
+              </f:facet>
+              <h:outputText value="#{ponente.biografia}"/>
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText value="Observaciones"/>
+              </f:facet>
+              <h:outputText value="#{ponente.observaciones}"/>
+            </h:column>
+          </h:dataTable>
+
+
+        </h:panelGroup>
+      </h:form>
+    </f:view>
+
+  </h:body>
+</html>
+

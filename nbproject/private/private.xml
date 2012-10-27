@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/home/tuxtor/GitHub/cpf-guatejug/web/WEB-INF/web.xml</file>
-        <file>file:/home/tuxtor/GitHub/cpf-guatejug/web/index.xhtml</file>
-        <file>file:/home/tuxtor/GitHub/cpf-guatejug/src/java/org/guatejug/util/EmailManager.java</file>
-        <file>file:/home/tuxtor/GitHub/cpf-guatejug/src/java/org/guatejug/presentation/Index.java</file>
-        <file>file:/home/tuxtor/GitHub/cpf-guatejug/src/java/org/guatejug/presentation/textos.properties</file>
-        <file>file:/home/tuxtor/GitHub/cpf-guatejug/src/java/org/guatejug/controller/PonenciaJpaController.java</file>
-    </open-files>
 </project-private>

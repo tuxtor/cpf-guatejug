@@ -16,7 +16,9 @@
 package org.guatejug.data;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -90,7 +92,7 @@ public class Ponencia implements Serializable {
 
         public Ponencia() {
                 NullValidator.performObjectValidation(this);
-                this.datashow=1;
+                this.datashow = 1;
         }
 
         public Ponencia(Integer idPonencia) {
@@ -130,12 +132,43 @@ public class Ponencia implements Serializable {
                 return categoria;
         }
 
+        public String getTextoCategoria() {
+                switch (categoria) {
+                        case 0:
+                                return "Java SE";
+                        case 1:
+                                return "Java ME/Android";
+                        case 2:
+                                return "Java EE/Java Web/Frameworks";
+                        case 3:
+                                return "Otros lenguajes JVM";
+                        case 4:
+                                return "JavaFX";
+                        case 5:
+                                return "Comunidad";
+                        default:
+                                return "Error";
+                }                
+        }
+
         public void setCategoria(short categoria) {
                 this.categoria = categoria;
         }
 
         public short getTipo() {
                 return tipo;
+        }
+        
+        public String getTextoTipo() {
+                switch (tipo) {
+                        case 0:
+                                return "Conferencia";
+                        case 1:
+                                return "Taller";
+                        
+                        default:
+                                return "Error";
+                }
         }
 
         public void setTipo(short tipo) {
@@ -160,6 +193,18 @@ public class Ponencia implements Serializable {
 
         public short getDuracion() {
                 return duracion;
+        }
+        
+        public String getTextoDuracion() {
+                switch (tipo) {
+                        case 0:
+                                return "30 Min.";
+                        case 1:
+                                return "60 Min.";
+                        
+                        default:
+                                return "Error";
+                }
         }
 
         public void setDuracion(short duracion) {

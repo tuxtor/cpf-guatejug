@@ -47,3 +47,7 @@
 .table-ponencias td:hover {
 	background-color: #fff;
 }
+
+.table-ponencias second {
+	width: 1024px;
+}

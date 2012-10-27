@@ -6,8 +6,8 @@
     <class>org.guatejug.data.Ponente</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
-      <property name="eclipselink.logging.level" value="FINEST"/>
-      <property name="eclipselink.logging.parameters" value="true"/>
+      <property name="eclipselink.logging.level" value="WARNING"/>
+      <property name="eclipselink.logging.parameters" value="false"/>
     </properties>
   </persistence-unit>
 </persistence>

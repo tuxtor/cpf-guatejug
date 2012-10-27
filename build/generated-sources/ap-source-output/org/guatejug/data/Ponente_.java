@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import org.guatejug.data.Ponencia;
 
-@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2012-10-18T01:00:18")
+@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2012-10-27T20:05:55")
 @StaticMetamodel(Ponente.class)
 public class Ponente_ { 
 

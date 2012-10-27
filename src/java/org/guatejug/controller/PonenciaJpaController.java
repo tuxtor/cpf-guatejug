@@ -199,7 +199,8 @@ public class PonenciaJpaController implements Serializable {
                         }
                         return q.getResultList();
                 } finally {
-                        em.close();
+                        //em.close();
+                        em.clear();
                 }
         }
 
